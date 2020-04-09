@@ -10,7 +10,7 @@ import GlobalStyles from '../components/GlobalStyles/GlobalStyles'
 import Header from '../components/Header/header'
 
 function App() {
-  const [bacon, setBacon] = useState(null);
+  
 
   useEffect(() => {
     fetch('/bacon')
