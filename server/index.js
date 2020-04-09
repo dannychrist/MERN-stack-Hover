@@ -6,8 +6,10 @@ const morgan = require('morgan');
 
 const PORT = 4000;
 
+const items = require('./data/items.json');
+
 express()
-  .use(function(req, res, next) {
+  .use(function (req, res, next) {
     res.header(
       'Access-Control-Allow-Methods',
       'OPTIONS, HEAD, GET, PUT, POST, DELETE'
@@ -26,5 +28,10 @@ express()
 
   // REST endpoints?
   .get('/bacon', (req, res) => res.status(200).json('🥓'))
+
+  // GET Returns all the products
+  .get('/products', (req, res) => {
+    res.status(200).send(items);
+  })
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
