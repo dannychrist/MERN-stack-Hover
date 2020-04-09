@@ -3,7 +3,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const fetch = require('isomorphic-fetch');
 
 const PORT = 4000;
 
