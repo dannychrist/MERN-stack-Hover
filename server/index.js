@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const fetch = require('isomorphic-fetch');
 
 const PORT = 4000;
 
@@ -34,6 +35,18 @@ express()
   // GET Returns all the products
   .get('/products', (req, res) => {
     res.status(200).send(items);
+  })
+
+  .get('/products/:productId', (req, res) => {
+    const currentProduct = items.find(
+      (item) => item.id === parseInt(req.params.productId)
+    );
+    if (currentProduct) res.status(200).send(currentProduct);
+    else {
+      res
+        .status(404)
+        .send({ type: 'Error', message: "The product doesn't exist!" });
+    }
   })
 
   // GET a company by its id number
@@ -122,6 +135,28 @@ express()
     });
 
     res.status(200).send(categories);
+  })
+
+  // GET Get all the products by category
+  .get('/products/category/:categoryName', (req, res) => {
+    let categories = [];
+    // Pushes all categories inside the array
+    items.forEach((item) => {
+      if (!categories.includes(item.category))
+        categories.push(item.category.toLowerCase());
+    });
+
+    if (categories.includes(req.params.categoryName)) {
+      const products = items.filter(
+        (item) =>
+          item.category.toLowerCase() === req.params.categoryName.toLowerCase()
+      );
+      res.status(200).send(products);
+    } else {
+      res
+        .status(404)
+        .send({ type: 'Error', message: "The category doesn't exist" });
+    }
   })
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
