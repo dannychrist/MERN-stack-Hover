@@ -100,28 +100,32 @@ express()
     }
   })
 
-  // PUT Modifies the inventory of an item
+  // PUT Modifies the inventory
   .put('/products/purchase-item', (req, res) => {
-    //  Check if the item passed exists
-    const itemExists = items.find((item) => item.id === parseInt(req.body.id));
+    const currentCart = [];
+    // Add the items in the array
+    req.body.forEach((item) => {
+      if (item.quantity !== 'undefined') currentCart.push(item);
+      else
+        res
+          .status(404)
+          .send({ type: 'Error', message: 'The quantity is not specified' });
+    });
 
-    // Check if item exists
-    if (itemExists) {
-      // checks if there's enough product
-      if (itemExists.numInStock - req.body.quantity >= 0) {
-        itemExists.numInStock -= req.body.quantity; // removes the number of items from the inventory
-        res.status(200).send({ success: 'true' });
-      } else {
-        res.status(409).send({
-          type: 'Error',
-          message: 'Not enough products in the inventory',
-        });
-      }
-    } else {
-      res
-        .status(404)
-        .send({ type: 'Error', message: "Product doesn't exists" });
-    }
+    items.forEach((item) => {
+      currentCart.forEach((itemCart) => {
+        // Checks if there's enough item in the inventory and that the quantity is bigger or equal to 0
+        if (
+          itemCart.id === item.id &&
+          item.numInStock >= itemCart.quantity &&
+          itemCart.quantity >= 0
+        )
+          // If the condition is respected, remove the items from the inventory
+          item.numInStock -= itemCart.quantity;
+      });
+    });
+
+    res.status(200).send({ success: true });
   })
 
   // GET Get all the categories
