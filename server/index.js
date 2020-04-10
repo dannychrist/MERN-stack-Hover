@@ -36,6 +36,11 @@ express()
     res.status(200).send(items);
   })
 
+  // GET Returns all the companies
+  .get('/companies', (req, res) => {
+    res.status(200).send(companies);
+  })
+
   .get('/products/:productId', (req, res) => {
     const currentProduct = items.find(
       (item) => item.id === parseInt(req.params.productId)
