@@ -20,12 +20,14 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // Fetches all the products
     dispatch(requestAllProducts());
     fetch('/products')
       .then((res) => res.json())
       .then((data) => dispatch(receiveAllProducts(data)))
       .catch((err) => dispatch(receiveProductsError()));
 
+    // Fetches all the companies
     dispatch(requestAllCompanies());
     fetch('/companies')
       .then((res) => res.json())
