@@ -9,23 +9,23 @@ export default function companiesReducer(state = initialState, action) {
     case 'REQUEST_ALL_COMPANIES': {
       return {
         ...state,
-        status: 'loading', 
-      }
+        status: 'loading',
+      };
     }
 
     case 'RECEIVE_ALL_COMPANIES': {
       return {
         ...state,
-        companies: action.data,
+        companies: action.companies,
         status: 'idle',
-      }
+      };
     }
 
     case 'RECEIVE_COMPANIES_ERROR': {
       return {
         ...state,
         status: 'error',
-      }
+      };
     }
     default: {
       return state;

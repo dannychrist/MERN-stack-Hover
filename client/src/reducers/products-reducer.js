@@ -1,5 +1,5 @@
 const initialState = {
-  products: [],
+  products: {},
   status: 'loading',
   error: null,
 };
@@ -9,23 +9,23 @@ export default function productsReducer(state = initialState, action) {
     case 'REQUEST_ALL_PRODUCTS': {
       return {
         ...state,
-        status: 'loading', 
-      }
+        status: 'loading',
+      };
     }
 
     case 'RECEIVE_ALL_PRODUCTS': {
       return {
         ...state,
-        products: action.data,
+        products: action.products,
         status: 'idle',
-      }
+      };
     }
 
     case 'RECEIVE_PRODUCTS_ERROR': {
       return {
         ...state,
         status: 'error',
-      }
+      };
     }
     default: {
       return state;
