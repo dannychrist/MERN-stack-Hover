@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 //components
 import GlobalStyles from '../components/GlobalStyles/GlobalStyles';
 import Header from '../components/Header/header';
+import Homepage from '../components/Homepage/Homepage'
+import Shop from '../components/Shop/Shop'
 
 // Import actions
 import {
@@ -53,10 +55,10 @@ function App() {
         <Header />
         <Switch>
           <Route exact path='/'>
-            Home
+            <Homepage/>
           </Route>
           <Route exact path='/shop'>
-            Shop
+            <Shop/>
           </Route>
           <Route exact path='/shop/:id'>
             Shop with filter
