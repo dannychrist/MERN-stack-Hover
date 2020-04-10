@@ -32,3 +32,6 @@ export default function productsReducer(state = initialState, action) {
     }
   }
 }
+
+export const getProducts = (state) => state.products.products;
+export const getProductsStatus = (state) => state.products.status;
