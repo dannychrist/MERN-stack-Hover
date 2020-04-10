@@ -16,8 +16,20 @@ import {
   receiveCompaniesError,
 } from '../actions';
 
+// Import products and companies state
+import { getProducts, getProductsStatus } from '../reducers/products-reducer';
+import {
+  getCompanies,
+  getCompaniesStatus,
+} from '../reducers/companies-reducer';
+
 function App() {
   const dispatch = useDispatch();
+
+  const productsState = useSelector(getProducts);
+  const productsStatus = useSelector(getProductsStatus);
+  const companiesState = useSelector(getCompanies);
+  const companiesStatus = useSelector(getCompaniesStatus);
 
   useEffect(() => {
     // Fetches all the products
@@ -35,7 +47,6 @@ function App() {
       .catch((err) => dispatch(receiveCompaniesError()));
   }, []);
 
-  const state = useSelector((state) => state.products);
   return (
     <Router>
       <div style={{ padding: '0 2.5% 0 2.5%' }}>

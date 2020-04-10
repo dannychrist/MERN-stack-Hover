@@ -32,3 +32,6 @@ export default function companiesReducer(state = initialState, action) {
     }
   }
 }
+
+export const getCompanies = (state) => state.companies.companies;
+export const getCompaniesStatus = (state) => state.companies.status;
