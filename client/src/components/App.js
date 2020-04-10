@@ -47,6 +47,8 @@ function App() {
       .catch((err) => dispatch(receiveCompaniesError()));
   }, []);
 
+  const state = useSelector((state) => state.products);
+  console.log(state);
   return (
     <Router>
       <div style={{ padding: '0 2.5% 0 2.5%' }}>
