@@ -7,6 +7,7 @@ import GlobalStyles from '../components/GlobalStyles/GlobalStyles';
 import Header from '../components/Header/header';
 import Homepage from '../components/Homepage/Homepage'
 import Shop from '../components/Shop/Shop'
+import ItemDetail from '../components/ItemDetail/ItemDetail'
 
 // Import actions
 import {
@@ -63,8 +64,8 @@ function App() {
           <Route exact path='/shop/:id'>
             Shop with filter
           </Route>
-          <Route exact path='/product/:productId'>
-            Single item
+          <Route exact path='/product/:id'>
+            <ItemDetail/>
           </Route>
           <Route exact path='/cart'>
             cart
