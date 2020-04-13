@@ -154,7 +154,7 @@ express()
         categories.push(item.category.toLowerCase());
     });
 
-    if (categories.includes(req.params.categoryName)) {
+    if (categories.includes(req.params.categoryName.toLowerCase())) {
       const products = items.filter(
         (item) =>
           item.category.toLowerCase() === req.params.categoryName.toLowerCase()
@@ -164,6 +164,33 @@ express()
       res
         .status(404)
         .send({ type: 'Error', message: "The category doesn't exist" });
+    }
+  })
+
+  .get('/search', (req, res) => {
+    if (req.query.brand !== 'null' && req.query.category !== 'null') {
+      let copy = items.filter((product) => {
+        return (
+          product.category.toLowerCase() === req.query.category.toLowerCase() &&
+          parseInt(req.query.brand) === product.companyId
+        );
+      });
+      if (copy.length > 0) res.send(copy);
+      else res.status(404).send({ type: 'error', message: 'No items!' });
+    } else if (req.query.brand !== 'null') {
+      let copy = items.filter((product) => {
+        return parseInt(req.query.brand) === product.companyId;
+      });
+      if (copy.length > 0) res.send(copy);
+      else res.status(404).send({ type: 'error', message: 'No items!' });
+    } else if (req.query.category !== 'null') {
+      let copy = items.filter((product) => {
+        return (
+          product.category.toLowerCase() === req.query.category.toLowerCase()
+        );
+      });
+      if (copy.length > 0) res.send(copy);
+      else res.status(404).send({ type: 'error', message: 'No items!' });
     }
   })
 
