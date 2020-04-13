@@ -7790,6 +7790,11 @@ parse-json@^5.0.0:
     json-parse-better-errors "^1.0.1"
     lines-and-columns "^1.1.6"
 
+parse-price@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/parse-price/-/parse-price-1.1.8.tgz#f1cbbc38a5747bb0538365ba4e8ddc0296e5f36f"
+  integrity sha512-KqMupWq7vTMNfKYvyvHKcBE7tKrY7kL3T/bKxfAHT/5mW2MYsa4xeTiiohGt7tkh2YCHAsyKxcOgE0k0lbUfGA==
+
 parse5@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"

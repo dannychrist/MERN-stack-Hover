@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 //components
 import GlobalStyles from '../components/GlobalStyles/GlobalStyles';
 import Header from '../components/Header/header';
-import Homepage from '../components/Homepage/Homepage'
-import Shop from '../components/Shop/Shop'
-import ItemDetail from '../components/ItemDetail/ItemDetail'
+import Homepage from '../components/Homepage/Homepage';
+import Shop from '../components/Shop/Shop';
+import ItemDetails from '../components/ItemDetail/ItemDetail';
 
 // Import actions
 import {
@@ -19,20 +19,8 @@ import {
   receiveCompaniesError,
 } from '../actions';
 
-// Import products and companies state
-import { getProducts, getProductsStatus } from '../reducers/products-reducer';
-import {
-  getCompanies,
-  getCompaniesStatus,
-} from '../reducers/companies-reducer';
-
 function App() {
   const dispatch = useDispatch();
-
-  const productsState = useSelector(getProducts);
-  const productsStatus = useSelector(getProductsStatus);
-  const companiesState = useSelector(getCompanies);
-  const companiesStatus = useSelector(getCompaniesStatus);
 
   useEffect(() => {
     // Fetches all the products
@@ -56,16 +44,16 @@ function App() {
         <Header />
         <Switch>
           <Route exact path='/'>
-            <Homepage/>
+            <Homepage />
           </Route>
           <Route exact path='/shop'>
-            <Shop/>
+            <Shop />
           </Route>
           <Route exact path='/shop/:id'>
             Shop with filter
           </Route>
           <Route exact path='/product/:id'>
-            <ItemDetail/>
+            <ItemDetails />
           </Route>
           <Route exact path='/cart'>
             cart
