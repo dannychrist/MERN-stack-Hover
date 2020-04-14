@@ -2,33 +2,33 @@ const initialState = {};
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case 'ADD_ITEM': {
+    case 'ADD_PRODUCT': {
       return {
         ...state,
-        [action.item.id]: {
-          ...action.item,
+        [action.product.id]: {
+          ...action.product,
           quantity:
-            state[action.item.id] && state[action.item.id].quantity
-              ? state[action.item.id].quantity + 1
+            state[action.product.id] && state[action.product.quantity]
+              ? state[action.product.quantity] + 1
               : 1,
         },
       };
     }
 
     case 'UPDATE_QUANTITY': {
-      const { itemId, newQuantity } = action;
+      const { productId, newQuantity } = action;
       return {
         ...state,
-        [itemId]: {
-          ...state[itemId],
+        [productId]: {
+          ...state[productId],
           quantity: newQuantity,
         },
       };
     }
 
-    case 'REMOVE_ITEM': {
+    case 'REMOVE_PRODUCT': {
       const newCart = { ...state };
-      delete newCart[action.itemId];
+      delete newCart[action.productId];
       return newCart;
     }
 
@@ -40,3 +40,4 @@ export default function cartReducer(state = initialState, action) {
       return state;
   }
 }
+
