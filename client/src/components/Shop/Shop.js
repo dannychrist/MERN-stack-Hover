@@ -80,8 +80,7 @@ const ItemDiv = styled.div`
   text-align: center;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  border: 2px solid #000;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   position: relative;
 `;
 

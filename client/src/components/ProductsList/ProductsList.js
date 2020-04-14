@@ -45,17 +45,18 @@ const PlaceholderItem = styled(Link)`
   align-items: center;
   flex-direction: column;
   position: relative;
+  font-size: 14px;
 `;
 
 const ProductPicture = styled.img`
   transition: 400ms ease-in-out;
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.05);
   }
 `;
 
 const Test = styled.div`
-  border: 2px solid #000;
+  /* border: 2px solid #000; */
   max-width: 80%;
   min-height: 50px;
   margin-top: 10px;
