@@ -39,7 +39,7 @@ const ItemDetail = () => {
       setProduct(prodObj);
     }
   }, [productStatus]);
-
+  console.log(product, 'product')
   // Returns an array of random numbers
   const getRandomNumbers = (length) => {
     let arr = [];
@@ -77,8 +77,8 @@ const ItemDetail = () => {
       {product !== null && company !== null && productStatus === 'idle' ? (
         <>
           <Wrapper>
+              <GoBack onClick={() => history.goBack()}>&lt;</GoBack>
             <ItemWrapper>
-              <GoBack onClick={() => history.goBack()}>Go Back</GoBack>
               <ItemName>
                 <ItemNameItem>{company.name}</ItemNameItem>
                 <ItemNameItem>{product.name}</ItemNameItem>
@@ -107,9 +107,16 @@ const ItemDetail = () => {
                 vitae lacus id sapien mattis gravida. Fusce sit amet est
                 molestie, tincidunt eros sit amet, viverra leo.
               </Description>
+              {
+                product.numInStock > 0 ? 
               <AddToCart onClick={() => dispatch(addItem(product))}>
                 ADD TO CART
               </AddToCart>
+              :
+              <SoldOut>
+                OUT OF STOCK
+              </SoldOut>
+              }
             </DescriptionWrapper>
             <RelatedItemWrapper>
               <BlackBox>RELATED ITEMS</BlackBox>
@@ -142,6 +149,8 @@ const ItemDetail = () => {
     </>
   );
 };
+
+
 
 const RelatedItem = styled.div`
   width: 25%;
@@ -183,6 +192,23 @@ const AddToCart = styled.button`
   position: absolute;
   width: 100%;
   cursor: pointer;
+`;
+
+const SoldOut = styled.button`
+  text-decoration: underline;
+  background-color: grey;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  border-top: 1px solid black;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
+  outline: none;
+  height: 100px;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  cursor: not-allowed;
 `;
 
 const Description = styled.div`
@@ -240,12 +266,17 @@ const ItemName = styled.div`
 `;
 
 const GoBack = styled.button`
-  color: #fff;
-  background-color: #000;
+  color: black;
+  position: fixed;
+  background-color: transparent;
   border: none;
-  border-bottom: 1px solid #fff;
-  padding: 5px 0px;
+  font-size: 25px;
+  mix-blend-mode: difference;
+  /* border-bottom: 1px solid #fff; */
+  /* padding: 5px 0px; */
   cursor: pointer;
+  margin-left: -2.5%;
+  margin-top: -125px;
 `;
 
 const NoItemsContainer = styled.div`
