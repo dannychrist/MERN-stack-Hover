@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { addItem } from '../../actions';
 
@@ -12,7 +12,6 @@ const ItemDetail = () => {
   const [company, setCompany] = React.useState(null);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   // checking array of all products & companies
   const productArray = useSelector((state) => state.products.products);
@@ -77,7 +76,6 @@ const ItemDetail = () => {
       {product !== null && company !== null && productStatus === 'idle' ? (
         <>
           <Wrapper>
-              <GoBack onClick={() => history.goBack()}>&lt;</GoBack>
             <ItemWrapper>
               <ItemName>
                 <ItemNameItem>{company.name}</ItemNameItem>
@@ -263,20 +261,6 @@ const ItemName = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
-`;
-
-const GoBack = styled.button`
-  color: black;
-  position: fixed;
-  background-color: transparent;
-  border: none;
-  font-size: 25px;
-  mix-blend-mode: difference;
-  /* border-bottom: 1px solid #fff; */
-  /* padding: 5px 0px; */
-  cursor: pointer;
-  margin-left: -2.5%;
-  margin-top: -125px;
 `;
 
 const NoItemsContainer = styled.div`
