@@ -2,16 +2,53 @@ import React from 'react'
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { formatPriceForHumans } from '../../helpers';
+import parsePrice from 'parse-price';
 
 import CartItem from '../Cart/CartItem';
+import { useDispatch } from 'react-redux';
+
+import {
+
+  updateCart,
+} from '../../actions';
 
 const Cart = () => {
-  const products = useSelector(state => state.cart);
-  
 
+
+  const dispatch = useDispatch();
+  const products = useSelector(state => state.cart);
   console.log(products)
 
+  const grandTotal = ()  => {
+    let price = 0;
+    Object.values(products).forEach((item) => {
+      console.log(item)
+      return price += parsePrice(item.price) * parseInt(item.quantity)
+
+    })
+    return price;
+  }
+  console.log(products)
+
+  
+  const handleSubmit = () => {
+    fetch('/products/purchase-item', {
+      method: 'PUT',
+      body: JSON.stringify(Object.values(products)),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      // if (data.success === true) {
+      //   dispatch(updateCart(data.test))
+        
+      // }
+    })
+  }
   return (
     <Wrapper>
       <Top>
@@ -34,10 +71,11 @@ const Cart = () => {
       
       <Bottom>
         <Total>
-          Total:
+          Total: ${grandTotal().toFixed(2)}
         </Total>
         <ButtonWrapper>
-          <Button exact activeClassName='active' to='/shop' style={{ width: 170 }}>Continue Shopping</Button>
+          <Button exact activeClassName='active' to='/shop' style={{ width: 160 }}>Continue Shopping</Button>
+          <PurchaseButton onClick={handleSubmit} style={{ width: 90 }}>Purchase</PurchaseButton>
         </ButtonWrapper>
       </Bottom>
     </Wrapper>
@@ -135,6 +173,26 @@ const Button = styled(NavLink)`
   border: 1px solid black;
   text-decoration: none; 
   
+  &:hover {
+    background: black;
+    color: white;
+  }
+`;
+
+const PurchaseButton = styled.button`
+  margin: 10px;
+  display: block;
+  width: 100%;
+  background: white;
+  color: black;
+  padding: 5px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid black;
+  text-decoration: none; 
+
   &:hover {
     background: black;
     color: white;

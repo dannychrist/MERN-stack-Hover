@@ -4,8 +4,18 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
 import { updateQuantity, removeProduct } from '../../actions';
 
-const CartItem =({ product, products }) => {
-  const productQuantity = useSelector((state) => state.products[product.quantity]);
+const CartItem =({ product }) => {
+  const productQuantity = useSelector((state) => state.cart[product.id].quantity);
+
+  console.log(productQuantity)
+  console.log(product)
+
+  const subtotal = useSelector((state) => {
+    let newPrice = state.cart[product.id].price
+    newPrice = newPrice.split('$')[1]
+    console.log(newPrice)
+    return state.cart[product.id].quantity * Number(newPrice)
+  }) 
 
   const dispatch = useDispatch();
   console.log(product.quantity)
@@ -24,9 +34,15 @@ const CartItem =({ product, products }) => {
 
       <QuantityWrapper>
         <QuantityInput 
-          type="text"
+          type="number"
+          min="0"
+          max={product.numInStock}
           value={productQuantity}
-          onChange={(ev) => dispatch(updateQuantity(product.id, ev.target.value))}
+          onChange={(ev) => {
+            if (product.numInStock === 0) return
+              dispatch(updateQuantity(product.id, ev.target.value))
+            }
+          }
         />
       </QuantityWrapper>
 
@@ -34,7 +50,7 @@ const CartItem =({ product, products }) => {
         <RemoveButton onClick={() => dispatch(removeProduct(product.id))}>
           Remove
         </RemoveButton>
-        <TotalPrice>$</TotalPrice>
+      <TotalPrice>${subtotal.toFixed(2)}</TotalPrice>
       </TotalWrapper>
     </Wrapper>
   )

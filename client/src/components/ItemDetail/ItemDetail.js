@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, Link, Redirect } from 'react-router-dom';
 
 import { addProduct } from '../../actions';
 
@@ -12,9 +12,6 @@ const ItemDetail = () => {
   const [company, setCompany] = React.useState(null);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
-  console.log(product);
-  
 
   // checking array of all products & companies
   const productArray = useSelector((state) => state.products.products);
@@ -32,15 +29,15 @@ const ItemDetail = () => {
       let compObj = companyArray.find((obj) => obj.id === product.companyId);
       setCompany(compObj);
     }
-  }, [product]);
+  }, [product, id]);
 
   // setting the product state using using id parameter. runs only when productStatus changes
   React.useEffect(() => {
     if (productStatus === 'idle') {
-      let prodObj = productArray.find((obj) => obj.id == id);
+      let prodObj = productArray.find((obj) => obj.id === parseInt(id));
       setProduct(prodObj);
     }
-  }, [productStatus]);
+  }, [productStatus, id]);
 
   // Returns an array of random numbers
   const getRandomNumbers = (length) => {
@@ -80,14 +77,13 @@ const ItemDetail = () => {
         <>
           <Wrapper>
             <ItemWrapper>
-              <GoBack onClick={() => history.goBack()}>Go Back</GoBack>
               <ItemName>
                 <ItemNameItem>{company.name}</ItemNameItem>
                 <ItemNameItem>{product.name}</ItemNameItem>
                 <ItemNameItem>{product.price}</ItemNameItem>
               </ItemName>
               <ImgWrapper>
-                <ItemImage src={product.imageSrc} />
+                <ItemImage src={product.imageSrc} alt={product.name} />
               </ImgWrapper>
             </ItemWrapper>
             <DescriptionWrapper>
@@ -109,21 +105,20 @@ const ItemDetail = () => {
                 vitae lacus id sapien mattis gravida. Fusce sit amet est
                 molestie, tincidunt eros sit amet, viverra leo.
               </Description>
-              <AddToCart onClick={() => dispatch(addProduct(product))}>
-                ADD TO CART
-              </AddToCart>
+              {product.numInStock > 0 ? (
+                <AddToCart onClick={() => dispatch(addProduct(product))}>
+                  ADD TO CART
+                </AddToCart>
+              ) : (
+                <SoldOut>OUT OF STOCK</SoldOut>
+              )}
             </DescriptionWrapper>
             <RelatedItemWrapper>
               <BlackBox>RELATED ITEMS</BlackBox>
               {relatedArray.length > 0 ? (
                 relatedArray.map((p) => {
                   return (
-                    <RelatedItem
-                      key={p.id}
-                      onClick={() =>
-                        (window.location.href = `/product/${p.id}`)
-                      }
-                    >
+                    <RelatedItem key={p.id} to={`/product/${p.id}`}>
                       <img src={p.imageSrc} />
                     </RelatedItem>
                   );
@@ -145,7 +140,7 @@ const ItemDetail = () => {
   );
 };
 
-const RelatedItem = styled.div`
+const RelatedItem = styled(Link)`
   width: 25%;
   border-left: 1px solid black;
   display: flex;
@@ -185,6 +180,23 @@ const AddToCart = styled.button`
   position: absolute;
   width: 100%;
   cursor: pointer;
+`;
+
+const SoldOut = styled.button`
+  text-decoration: underline;
+  background-color: grey;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  border-top: 1px solid black;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
+  outline: none;
+  height: 100px;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  cursor: not-allowed;
 `;
 
 const Description = styled.div`
@@ -239,15 +251,6 @@ const ItemName = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
-`;
-
-const GoBack = styled.button`
-  color: #fff;
-  background-color: #000;
-  border: none;
-  border-bottom: 1px solid #fff;
-  padding: 5px 0px;
-  cursor: pointer;
 `;
 
 const NoItemsContainer = styled.div`

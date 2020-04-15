@@ -29,15 +29,14 @@ const Shop = () => {
       .then((data) => {
         if (data.length > 0) dispatch(receiveAllProducts(data));
         else dispatch(receiveProductsError(data));
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <WrapperDiv>
       <CategoryDiv>
-        <AllProducts onClick={() => getAllProducts()}>
-          + All PRODUCTS
-        </AllProducts>
+        <Reset onClick={() => getAllProducts()}>+ RESET</Reset>
         <Categories />
         <Brands companies={state.companies.companies} />
       </CategoryDiv>
@@ -45,9 +44,7 @@ const Shop = () => {
         <ProductsList products={state.products.products} />
       </ItemDiv>
       <SortDiv>
-        <AllProducts onClick={() => getAllProducts()}>
-          LATEST ARRIVAL +
-        </AllProducts>
+        <Reset onClick={() => getAllProducts()}>LATEST ARRIVAL +</Reset>
         <PriceFilterText
           onClick={() => dispatch(GetProductsAsc(state.products.products))}
         >
@@ -80,8 +77,7 @@ const ItemDiv = styled.div`
   text-align: center;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  border: 2px solid #000;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   position: relative;
 `;
 
@@ -93,7 +89,7 @@ const WrapperDiv = styled.div`
   font-family: 'Open Sans', sans-serif;
 `;
 
-const AllProducts = styled.p`
+const Reset = styled.p`
   margin-bottom: 20px;
   font-weight: bold;
   cursor: pointer;
