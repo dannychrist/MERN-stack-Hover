@@ -3,7 +3,22 @@ import styled from 'styled-components';
 
 import { NavLink } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
+
 const Header = () => {
+  const [quantity, setQuantity] = React.useState(null)
+  const cartNumber = useSelector(state => state.cart);
+  const cartValues = Object.values(cartNumber);
+  let counter = 0;
+
+  React.useEffect(() => {
+    cartValues.forEach(item => {
+      setQuantity(counter += item.quantity)
+    })
+  },[cartValues])
+  console.log(typeof cartNumber, 'cart')
+  console.log(cartValues, 'values')
+  console.log(quantity, 'quantity')
   return (
     <HeaderDiv>
       <Logo>H+VER</Logo>
@@ -19,8 +34,8 @@ const Header = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink exact to='/cart' activeStyle={{ textDecoration: 'underline' }}>
-            CART
+          <NavLink exact to='/cart' style={{display:'flex'}} activeStyle={{ textDecoration: 'underline' }}>
+            CART &thinsp; {quantity > 0 ? <div>&#40;{quantity}&#41;</div> : null}
           </NavLink>
         </li>
       </LinkDiv>

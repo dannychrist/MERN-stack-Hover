@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, Redirect } from 'react-router-dom';
 
 import { addItem } from '../../actions';
 
@@ -29,7 +29,7 @@ const ItemDetail = () => {
       let compObj = companyArray.find((obj) => obj.id === product.companyId);
       setCompany(compObj);
     }
-  }, [product]);
+  }, [product, id]);
 
   // setting the product state using using id parameter. runs only when productStatus changes
   React.useEffect(() => {
@@ -37,7 +37,7 @@ const ItemDetail = () => {
       let prodObj = productArray.find((obj) => obj.id === parseInt(id));
       setProduct(prodObj);
     }
-  }, [productStatus]);
+  }, [productStatus, id]);
 
   // Returns an array of random numbers
   const getRandomNumbers = (length) => {
@@ -118,12 +118,7 @@ const ItemDetail = () => {
               {relatedArray.length > 0 ? (
                 relatedArray.map((p) => {
                   return (
-                    <RelatedItem
-                      key={p.id}
-                      onClick={() =>
-                        (window.location.href = `/product/${p.id}`)
-                      }
-                    >
+                    <RelatedItem key={p.id} to={`/product/${p.id}`}>
                       <img src={p.imageSrc} />
                     </RelatedItem>
                   );
@@ -145,7 +140,7 @@ const ItemDetail = () => {
   );
 };
 
-const RelatedItem = styled.div`
+const RelatedItem = styled(Link)`
   width: 25%;
   border-left: 1px solid black;
   display: flex;
