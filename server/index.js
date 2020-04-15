@@ -176,13 +176,13 @@ express()
         );
       });
       if (copy.length > 0) res.send(copy);
-      else res.status(404).send({ type: 'error', message: 'No items!' });
+      else res.status(202).send({ type: 'error', message: 'No items!' });
     } else if (req.query.brand !== 'null') {
       let copy = items.filter((product) => {
         return parseInt(req.query.brand) === product.companyId;
       });
       if (copy.length > 0) res.send(copy);
-      else res.status(404).send({ type: 'error', message: 'No items!' });
+      else res.status(202).send({ type: 'error', message: 'No items!' });
     } else if (req.query.category !== 'null') {
       let copy = items.filter((product) => {
         return (
@@ -190,7 +190,7 @@ express()
         );
       });
       if (copy.length > 0) res.send(copy);
-      else res.status(404).send({ type: 'error', message: 'No items!' });
+      else res.status(202).send({ type: 'error', message: 'No items!' });
     }
   })
 

@@ -13,10 +13,8 @@ const Brands = ({ companies }) => {
   const dispatch = useDispatch();
 
   // Change the state array and store all products by a brand
-  const getProductsByBrands = (e) => {
-    window.localStorage.setItem('brand', e.target.id);
+  const getProductsByBrands = () => {
     dispatch(requestAllProducts());
-
     fetch(
       `/search?brand=${window.localStorage.getItem(
         'brand'
@@ -29,8 +27,29 @@ const Brands = ({ companies }) => {
       });
   };
 
+  const getAllProducts = () => {
+    /// Clears the localstorage
+    window.localStorage.clear();
+    dispatch(requestAllProducts());
+    fetch('/products')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) dispatch(receiveAllProducts(data));
+        else dispatch(receiveProductsError(data));
+      });
+  };
   return (
     <React.Fragment>
+      <AllBrand
+        onClick={() => {
+          window.localStorage.removeItem('brand');
+          if (window.localStorage.getItem('category') !== null) {
+            getProductsByBrands();
+          } else getAllProducts();
+        }}
+      >
+        + ALL BRANDS
+      </AllBrand>
       <span style={{ fontWeight: 'bold' }}>BRANDS</span>
       {companies.map((company) => {
         return (
@@ -38,9 +57,15 @@ const Brands = ({ companies }) => {
             isSelected={
               company.id === parseInt(window.localStorage.getItem('brand'))
             }
-            onClick={(e) => getProductsByBrands(e)}
+            onClick={(e) => {
+              window.localStorage.setItem('brand', e.target.id);
+              getProductsByBrands();
+            }}
             id={company.id}
+            key={company.id}
           >
+            {company.id === parseInt(window.localStorage.getItem('brand')) &&
+              '+ '}
             {company.name}
           </Brand>
         );
@@ -53,9 +78,14 @@ const Brand = styled.div`
   margin: 5px 0px;
   cursor: pointer;
   &:hover {
-    font-weight: bold;
+    text-decoration: underline;
   }
   font-weight: ${(props) => props.isSelected && 'bold'};
+`;
+
+const AllBrand = styled.p`
+  font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 export default Brands;

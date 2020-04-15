@@ -10,17 +10,20 @@ import {
 } from '../../actions';
 
 const Categories = () => {
+  //
   const [categories, SetCategories] = React.useState([]);
+  const [isSelected, SetIsSelected] = React.useState(false);
+
   const dispatch = useDispatch();
 
+  // Fetch all the categories to display on the side
   React.useEffect(() => {
     fetch('/categories')
       .then((res) => res.json())
       .then((data) => SetCategories(data));
   }, []);
 
-  const getProductsByCategories = (e) => {
-    window.localStorage.setItem('category', e.target.id);
+  const fetchProduct = () => {
     dispatch(requestAllProducts());
     fetch(
       `/search?brand=${window.localStorage.getItem(
@@ -31,8 +34,16 @@ const Categories = () => {
       .then((data) => {
         if (data.length > 0) dispatch(receiveAllProducts(data));
         else dispatch(receiveProductsError(data));
-      })
-      .catch((err) => console.log(err));
+      });
+  };
+
+  const getProductsByCategories = () => {
+    SetIsSelected(!isSelected);
+    if (!isSelected) fetchProduct();
+    else {
+      window.localStorage.removeItem('category');
+      fetchProduct();
+    }
   };
 
   return (
@@ -42,9 +53,19 @@ const Categories = () => {
         return (
           <CategoriesLabel
             key={index}
-            onClick={(e) => getProductsByCategories(e)}
+            onClick={(e) => {
+              window.localStorage.setItem('category', e.target.id);
+              getProductsByCategories();
+            }}
             id={caterogyName}
+            isSelected={
+              caterogyName === window.localStorage.getItem('category') &&
+              isSelected
+            }
           >
+            {caterogyName === window.localStorage.getItem('category') &&
+              isSelected &&
+              '+ '}
             {caterogyName}
           </CategoriesLabel>
         );
@@ -56,8 +77,10 @@ const Categories = () => {
 const CategoriesLabel = styled.div`
   margin: 5px 0px;
   cursor: pointer;
+  font-weight: ${(props) => props.isSelected && 'bold'};
+
   &:hover {
-    font-weight: bold;
+    text-decoration: underline;
   }
 `;
 
