@@ -29,15 +29,14 @@ const Shop = () => {
       .then((data) => {
         if (data.length > 0) dispatch(receiveAllProducts(data));
         else dispatch(receiveProductsError(data));
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <WrapperDiv>
       <CategoryDiv>
-        <AllProducts onClick={() => getAllProducts()}>
-          + All PRODUCTS
-        </AllProducts>
+        <Reset onClick={() => getAllProducts()}>+ RESET</Reset>
         <Categories />
         <Brands companies={state.companies.companies} />
       </CategoryDiv>
@@ -45,9 +44,7 @@ const Shop = () => {
         <ProductsList products={state.products.products} />
       </ItemDiv>
       <SortDiv>
-        <AllProducts onClick={() => getAllProducts()}>
-          LATEST ARRIVAL +
-        </AllProducts>
+        <Reset onClick={() => getAllProducts()}>LATEST ARRIVAL +</Reset>
         <PriceFilterText
           onClick={() => dispatch(GetProductsAsc(state.products.products))}
         >
@@ -92,7 +89,7 @@ const WrapperDiv = styled.div`
   font-family: 'Open Sans', sans-serif;
 `;
 
-const AllProducts = styled.p`
+const Reset = styled.p`
   margin-bottom: 20px;
   font-weight: bold;
   cursor: pointer;

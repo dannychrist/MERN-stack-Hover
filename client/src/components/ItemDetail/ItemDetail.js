@@ -34,11 +34,11 @@ const ItemDetail = () => {
   // setting the product state using using id parameter. runs only when productStatus changes
   React.useEffect(() => {
     if (productStatus === 'idle') {
-      let prodObj = productArray.find((obj) => obj.id == id);
+      let prodObj = productArray.find((obj) => obj.id === parseInt(id));
       setProduct(prodObj);
     }
   }, [productStatus]);
-  console.log(product, 'product')
+
   // Returns an array of random numbers
   const getRandomNumbers = (length) => {
     let arr = [];
@@ -83,7 +83,7 @@ const ItemDetail = () => {
                 <ItemNameItem>{product.price}</ItemNameItem>
               </ItemName>
               <ImgWrapper>
-                <ItemImage src={product.imageSrc} />
+                <ItemImage src={product.imageSrc} alt={product.name} />
               </ImgWrapper>
             </ItemWrapper>
             <DescriptionWrapper>
@@ -105,16 +105,13 @@ const ItemDetail = () => {
                 vitae lacus id sapien mattis gravida. Fusce sit amet est
                 molestie, tincidunt eros sit amet, viverra leo.
               </Description>
-              {
-                product.numInStock > 0 ? 
-              <AddToCart onClick={() => dispatch(addItem(product))}>
-                ADD TO CART
-              </AddToCart>
-              :
-              <SoldOut>
-                OUT OF STOCK
-              </SoldOut>
-              }
+              {product.numInStock > 0 ? (
+                <AddToCart onClick={() => dispatch(addItem(product))}>
+                  ADD TO CART
+                </AddToCart>
+              ) : (
+                <SoldOut>OUT OF STOCK</SoldOut>
+              )}
             </DescriptionWrapper>
             <RelatedItemWrapper>
               <BlackBox>RELATED ITEMS</BlackBox>
@@ -147,8 +144,6 @@ const ItemDetail = () => {
     </>
   );
 };
-
-
 
 const RelatedItem = styled.div`
   width: 25%;
