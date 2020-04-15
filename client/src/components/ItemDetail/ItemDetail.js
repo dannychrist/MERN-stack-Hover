@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link, Redirect } from 'react-router-dom';
 
-import { addItem } from '../../actions';
+import { addProduct } from '../../actions';
 
 const ItemDetail = () => {
   // state
@@ -106,7 +106,7 @@ const ItemDetail = () => {
                 molestie, tincidunt eros sit amet, viverra leo.
               </Description>
               {product.numInStock > 0 ? (
-                <AddToCart onClick={() => dispatch(addItem(product))}>
+                <AddToCart onClick={() => dispatch(addProduct(product))}>
                   ADD TO CART
                 </AddToCart>
               ) : (

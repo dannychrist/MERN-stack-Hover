@@ -28,20 +28,20 @@ export const receiveCompaniesError = () => ({
 });
 
 // cart reducers
-export const addItem = (item) => ({
-  type: 'ADD_ITEM',
-  item,
+export const addProduct = (product) => ({
+  type: 'ADD_PRODUCT',
+  product,
 });
 
-export const removeItem = (itemId) => ({
-  type: 'REMOVE_ITEM',
-  itemId,
-});
-
-export const updateQuantity = (itemId, newQuantity) => ({
+export const updateQuantity = (productId, newQuantity) => ({
   type: 'UPDATE_QUANTITY',
-  itemId,
+  productId,
   newQuantity,
+});
+
+export const removeProduct = (productId) => ({
+  type: 'REMOVE_PRODUCT',
+  productId,
 });
 
 export const clearCart = () => ({

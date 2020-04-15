@@ -8,6 +8,8 @@ import Header from '../components/Header/header';
 import Homepage from '../components/Homepage/Homepage';
 import Shop from '../components/Shop/Shop';
 import ItemDetails from '../components/ItemDetail/ItemDetail';
+import Cart from '../components/Cart';
+import Purchased from '../components/Purchased';
 
 // Import actions
 import {
@@ -56,7 +58,10 @@ function App() {
             <ItemDetails />
           </Route>
           <Route exact path='/cart'>
-            cart
+            <Cart />
+          </Route>
+          <Route exact path='/purchased'>
+            <Purchased />
           </Route>
         </Switch>
       </div>
