@@ -6,32 +6,54 @@ import { NavLink } from 'react-router-dom';
 const Header = () => {
   return (
     <HeaderDiv>
-      <NavLink exact to='/' activeStyle={{ textDecoration: 'underline' }}>
-        HOME
-      </NavLink>
-      <NavLink exact to='/shop' activeStyle={{ textDecoration: 'underline' }}>
-        SHOP
-      </NavLink>
-      <NavLink exact to='/cart' activeStyle={{ textDecoration: 'underline' }}>
-        CART
-      </NavLink>
+      <Logo>H+VER</Logo>
+      <LinkDiv>
+        <li>
+          <NavLink exact to='/' activeStyle={{ textDecoration: 'underline' }}>
+            HOME
+          </NavLink>  
+        </li>
+        <li>
+          <NavLink exact to='/shop' activeStyle={{ textDecoration: 'underline' }}>
+            SHOP
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to='/cart' activeStyle={{ textDecoration: 'underline' }}>
+            CART
+          </NavLink>
+        </li>
+      </LinkDiv>
     </HeaderDiv>
   );
 };
 
+const Logo = styled.div`
+  font-size: 30px;
+  font-family:'Righteous', cursive;
+  margin-left: 40px;
+`
+
+const LinkDiv = styled.ul`
+  list-style: none;
+  display: flex;
+  margin-right: 40px;
+`
+
 const HeaderDiv = styled.div`
   width: 100%;
   border: 1px solid black;
-  margin: auto;
   margin-top: 50px;
   font-family: 'Open Sans', sans-serif;
-  padding: 25px 0 25px 0;
-  text-align: right;
+  padding: 30px 0px 30px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   a {
     text-decoration: none;
     color: black;
-    margin: 0 20px 0 20px;
+    margin-left: 40px;
   }
 `;
 
