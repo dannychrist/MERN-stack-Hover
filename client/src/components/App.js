@@ -11,7 +11,8 @@ import ItemDetails from '../components/ItemDetail/ItemDetail';
 import Cart from '../components/Cart';
 import Purchased from '../components/Purchased';
 import FourOhFour from '../components/FourOhFour/FourOhFour';
-import Footer from '../components/Footer/Footer'
+import Footer from '../components/Footer/Footer';
+import About from '../components/About/About';
 
 // Import actions
 import {
@@ -49,6 +50,9 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Homepage />
+          </Route>
+          <Route exact path='/about'>
+            <About />
           </Route>
           <Route exact path='/shop'>
             <Shop />

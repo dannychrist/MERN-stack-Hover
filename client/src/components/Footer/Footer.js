@@ -11,30 +11,30 @@ const Footer = () => {
     <WrapperDiv>
       {/* <Title>About us</Title> */}
       <AboutUsDiv>
-        About us
+        <GridTitle>ABOUT US</GridTitle>
         <ul>
-          <li>About</li>
-          <li>Press</li>
-          <li>Contact</li>
-          <li>Career</li>
+          <li>ABOUT</li>
+          <li>PRESS</li>
+          <li>CONTACT</li>
+          <li>CAREER</li>
         </ul>
       </AboutUsDiv>
       <CustomerServiceDiv>
-        Customer Service
+        <GridTitle>CUSTOMER SERVICE</GridTitle>
         <ul>
           <li>FAQ</li>
-          <li>Repair Service</li>
-          <li>Size Guide</li>
-          <li>Terms & Conditions</li>
-          <li>Privacy Policy</li>
+          <li>REPAIR SERVICE</li>
+          <li>SIZE GUIDE</li>
+          <li>TERMS & CONDITIONS</li>
+          <li>PRIVACY POLICY</li>
         </ul>
       </CustomerServiceDiv>
       <FollowUsDiv>
-        Follow us!
+        <GridTitle>FOLLOW US!</GridTitle>
         <ul>
-        <li>Facebook</li>
-        <li>Instagram</li>
-        <li>Pintrest</li>
+        <li>FACEBOOK</li>
+        <li>INSTAGRAM</li>
+        <li>PINTREST</li>
         </ul>
       </FollowUsDiv>
     </WrapperDiv>
@@ -46,11 +46,16 @@ const Footer = () => {
 
 export default Footer;
 
+const GridTitle = styled.div`
+  text-decoration: underline;
+  margin-bottom: 15px;
+`
+
 const WrapperDiv = styled.div`
-      margin-top: 50px;
       display: grid;
       grid-template-columns: 33% 33% 33%;
       font-family: 'Open Sans', sans-serif;
+      margin-bottom: 50px;
 `
 
 const AboutUsDiv = styled.div`
@@ -60,16 +65,18 @@ const AboutUsDiv = styled.div`
     margin: auto;
     margin-top: 50px;
     margin-bottom: 0px;
-    padding: 25px 0 25px 10px;
+    padding: 25px 0 25px 25px;
     /* cursor: pointer; */
 `
 const CustomerServiceDiv = styled.div`
     width: 97%;
     text-align: left;
-    border: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: none;
     margin: auto;
     margin-top: 50px;
-    padding: 25px 0 25px 10px;
+    padding: 25px 0 25px 50px;
     /* cursor: pointer; */
 `
 const FollowUsDiv = styled.div`
@@ -79,9 +86,10 @@ const FollowUsDiv = styled.div`
     margin: auto;
     margin-top: 50px;
     margin-bottom: 0px;
+    margin-left: -1px;
     /* & :hover { 
       font-weight: bold;
     } */
-    padding: 25px 0 25px 10px;
+    padding: 25px 0 25px 25px;
     /* cursor: pointer; */
 `
