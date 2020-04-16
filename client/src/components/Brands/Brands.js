@@ -85,7 +85,8 @@ const Brand = styled.div`
 
 const AllBrand = styled.p`
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 export default Brands;

@@ -56,7 +56,6 @@ const ProductPicture = styled.img`
 `;
 
 const Test = styled.div`
-  /* border: 2px solid #000; */
   max-width: 80%;
   min-height: 50px;
   margin-top: 10px;

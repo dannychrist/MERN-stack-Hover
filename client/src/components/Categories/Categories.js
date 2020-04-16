@@ -13,7 +13,6 @@ const Categories = () => {
   //
   const [categories, SetCategories] = React.useState([]);
   const [isSelected, SetIsSelected] = React.useState(false);
-
   const dispatch = useDispatch();
 
   // Fetch all the categories to display on the side

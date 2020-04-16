@@ -26,8 +26,12 @@ const Header = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink exact to='/about' activeStyle={{ textDecoration: 'underline' }}>
-        ABOUT
+          <NavLink
+            exact
+            to='/about'
+            activeStyle={{ textDecoration: 'underline' }}
+          >
+            ABOUT
           </NavLink>
         </li>
         <li>
@@ -37,7 +41,7 @@ const Header = () => {
             style={{ display: 'flex' }}
             activeStyle={{ textDecoration: 'underline' }}
           >
-            CART {' '}
+            CART
             {Object.values(cartNumber).length > 0 ? (
               <div>&thinsp;&#40;{Object.values(cartNumber).length}&#41;</div>
             ) : null}
