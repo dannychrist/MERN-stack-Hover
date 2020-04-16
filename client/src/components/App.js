@@ -10,6 +10,8 @@ import Shop from '../components/Shop/Shop';
 import ItemDetails from '../components/ItemDetail/ItemDetail';
 import Cart from '../components/Cart';
 import Purchased from '../components/Purchased';
+import About from '../components/About/About';
+import Footer from '../components/Footer/Footer';
 
 // Import actions
 import {
@@ -42,7 +44,7 @@ function App() {
 
   return (
     <Router>
-      <div style={{ padding: '0 2.5% 0 2.5%' }}>
+      <div style={{ padding: '0 2.5% 0 2.5%', position:'relative'}}>
         <Header />
         <Switch>
           <Route exact path='/'>
@@ -63,7 +65,11 @@ function App() {
           <Route exact path='/purchased'>
             <Purchased />
           </Route>
+          <Route exact path='/about'>
+          <About />
+          </Route>
         </Switch>
+      <Footer />
       </div>
       <GlobalStyles />
     </Router>
