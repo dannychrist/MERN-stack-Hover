@@ -1,24 +1,20 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { updateQuantity, removeProduct } from '../../actions';
 
-const CartItem =({ product }) => {
-  const productQuantity = useSelector((state) => state.cart[product.id].quantity);
-
-  console.log(productQuantity)
-  console.log(product)
-
+const CartItem = ({ product }) => {
+  const productQuantity = useSelector(
+    (state) => state.cart[product.id].quantity
+  );
   const subtotal = useSelector((state) => {
-    let newPrice = state.cart[product.id].price
-    newPrice = newPrice.split('$')[1]
-    console.log(newPrice)
-    return state.cart[product.id].quantity * Number(newPrice)
-  }) 
+    let newPrice = state.cart[product.id].price;
+    newPrice = newPrice.split('$')[1];
+    return state.cart[product.id].quantity * Number(newPrice);
+  });
 
   const dispatch = useDispatch();
-  console.log(product.quantity)
 
   return (
     <Wrapper>
@@ -29,20 +25,19 @@ const CartItem =({ product }) => {
       <DescriptionWrapper>{product.name}</DescriptionWrapper>
 
       <PriceWrapper>
-      <Price>{product.price}</Price>
+        <Price>{product.price}</Price>
       </PriceWrapper>
 
       <QuantityWrapper>
-        <QuantityInput 
-          type="number"
-          min="0"
+        <QuantityInput
+          type='number'
+          min='1'
           max={product.numInStock}
           value={productQuantity}
           onChange={(ev) => {
-            if (product.numInStock === 0) return
-              dispatch(updateQuantity(product.id, ev.target.value))
-            }
-          }
+            if (product.numInStock === 0) return;
+            dispatch(updateQuantity(product.id, parseInt(ev.target.value)));
+          }}
         />
       </QuantityWrapper>
 
@@ -50,19 +45,20 @@ const CartItem =({ product }) => {
         <RemoveButton onClick={() => dispatch(removeProduct(product.id))}>
           Remove
         </RemoveButton>
-      <TotalPrice>${subtotal.toFixed(2)}</TotalPrice>
+        <TotalPrice>${subtotal.toFixed(2)}</TotalPrice>
       </TotalWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
-  display: grid; 
+  display: grid;
   grid-template-columns: 32% 32% 12% 12% 12%;
   color: black;
-  height: 20vh;
+  height: auto;
   border: 1px solid black;
   margin: 2px;
+  padding: 10px 0px;
   font-size: 18px;
 `;
 
@@ -76,6 +72,8 @@ const ItemWrapper = styled.div`
 const PlaceholderItem = styled.img`
   display: flex;
   justify-content: center;
+  align-items: center;
+
   width: auto;
   height: 158px;
   text-align: center;
@@ -83,6 +81,8 @@ const PlaceholderItem = styled.img`
 
 const DescriptionWrapper = styled.div`
   margin: 10px;
+  display: flex;
+  align-items: center;
 `;
 
 const PriceWrapper = styled.div`
@@ -90,11 +90,14 @@ const PriceWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   justify-content: center;
+  align-items: center;
 `;
 
 const Price = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+
   margin-bottom: 20px;
 `;
 
@@ -108,7 +111,7 @@ const QuantityWrapper = styled.div`
 const QuantityInput = styled.input`
   display: flex;
   justify-content: center;
-  width: 25px;
+  width: 30px;
   height: 25px;
   margin: auto;
   font-size: 15px;
@@ -143,6 +146,4 @@ const TotalPrice = styled.div`
   margin-bottom: 60px;
 `;
 
-
-
-export default CartItem
+export default CartItem;

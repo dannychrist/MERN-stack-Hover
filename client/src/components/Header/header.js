@@ -6,19 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const [quantity, setQuantity] = React.useState(null)
-  const cartNumber = useSelector(state => state.cart);
-  const cartValues = Object.values(cartNumber);
-  let counter = 0;
-
-  React.useEffect(() => {
-    cartValues.forEach(item => {
-      setQuantity(counter += item.quantity)
-    })
-  },[cartValues])
-  console.log(typeof cartNumber, 'cart')
-  console.log(cartValues, 'values')
-  console.log(quantity, 'quantity')
+  const cartNumber = useSelector((state) => state.cart);
   return (
     <HeaderDiv>
       <Logo>H+VER</Logo>
@@ -26,16 +14,28 @@ const Header = () => {
         <li>
           <NavLink exact to='/' activeStyle={{ textDecoration: 'underline' }}>
             HOME
-          </NavLink>  
+          </NavLink>
         </li>
         <li>
-          <NavLink exact to='/shop' activeStyle={{ textDecoration: 'underline' }}>
+          <NavLink
+            exact
+            to='/shop'
+            activeStyle={{ textDecoration: 'underline' }}
+          >
             SHOP
           </NavLink>
         </li>
         <li>
-          <NavLink exact to='/cart' style={{display:'flex'}} activeStyle={{ textDecoration: 'underline' }}>
-            CART &thinsp; {quantity > 0 ? <div>&#40;{quantity}&#41;</div> : null}
+          <NavLink
+            exact
+            to='/cart'
+            style={{ display: 'flex' }}
+            activeStyle={{ textDecoration: 'underline' }}
+          >
+            CART &thinsp;{' '}
+            {Object.values(cartNumber).length > 0 ? (
+              <div>&#40;{Object.values(cartNumber).length}&#41;</div>
+            ) : null}
           </NavLink>
         </li>
       </LinkDiv>
@@ -45,15 +45,15 @@ const Header = () => {
 
 const Logo = styled.div`
   font-size: 30px;
-  font-family:'Righteous', cursive;
+  font-family: 'Righteous', cursive;
   margin-left: 40px;
-`
+`;
 
 const LinkDiv = styled.ul`
   list-style: none;
   display: flex;
   margin-right: 40px;
-`
+`;
 
 const HeaderDiv = styled.div`
   width: 100%;

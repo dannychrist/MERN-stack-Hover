@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link, Redirect } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
-import { addProduct } from '../../actions';
+import { addProduct, updateQuantityAlreadyInCart } from '../../actions';
 
 const ItemDetail = () => {
   // state
@@ -20,6 +20,7 @@ const ItemDetail = () => {
   // checking to see if all products have been fetched
   const productStatus = useSelector((state) => state.products.status);
 
+  const cart = useSelector((state) => state.cart);
   // Stores the related item inside the array
   let relatedArray = [];
 
@@ -106,7 +107,22 @@ const ItemDetail = () => {
                 molestie, tincidunt eros sit amet, viverra leo.
               </Description>
               {product.numInStock > 0 ? (
-                <AddToCart onClick={() => dispatch(addProduct(product))}>
+                <AddToCart
+                  onClick={() => {
+                    let findProduct = Object.values(cart).find(
+                      (item) => item.id === product.id
+                    );
+                    // If the product is already in the cart it will only increase the quantity of it else add to the cart
+                    if (findProduct !== undefined) {
+                      dispatch(
+                        updateQuantityAlreadyInCart(
+                          findProduct.id,
+                          findProduct.quantity
+                        )
+                      );
+                    } else dispatch(addProduct(product));
+                  }}
+                >
                   ADD TO CART
                 </AddToCart>
               ) : (
@@ -180,6 +196,10 @@ const AddToCart = styled.button`
   position: absolute;
   width: 100%;
   cursor: pointer;
+  transition: 500ms;
+  &:hover {
+    background-color: #808080;
+  }
 `;
 
 const SoldOut = styled.button`

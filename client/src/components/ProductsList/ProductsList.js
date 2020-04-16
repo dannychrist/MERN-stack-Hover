@@ -45,29 +45,18 @@ const PlaceholderItem = styled(Link)`
   align-items: center;
   flex-direction: column;
   position: relative;
-<<<<<<< HEAD
-=======
   font-size: 14px;
->>>>>>> 0a15ca4c396f8d3ca17f51588b69ff714cf99b6a
 `;
 
 const ProductPicture = styled.img`
   transition: 400ms ease-in-out;
   &:hover {
-<<<<<<< HEAD
-    transform: scale(1.2);
-=======
     transform: scale(1.05);
->>>>>>> 0a15ca4c396f8d3ca17f51588b69ff714cf99b6a
   }
 `;
 
 const Test = styled.div`
-<<<<<<< HEAD
-  border: 2px solid #000;
-=======
   /* border: 2px solid #000; */
->>>>>>> 0a15ca4c396f8d3ca17f51588b69ff714cf99b6a
   max-width: 80%;
   min-height: 50px;
   margin-top: 10px;

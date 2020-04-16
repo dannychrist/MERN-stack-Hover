@@ -39,6 +39,12 @@ export const updateQuantity = (productId, newQuantity) => ({
   newQuantity,
 });
 
+export const updateQuantityAlreadyInCart = (productId, quantity) => ({
+  type: 'UPDATE_ITEM_ALREADY_IN_CART_QUANTITY',
+  productId,
+  quantity,
+});
+
 export const removeProduct = (productId) => ({
   type: 'REMOVE_PRODUCT',
   productId,

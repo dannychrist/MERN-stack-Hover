@@ -26,6 +26,17 @@ export default function cartReducer(state = initialState, action) {
       };
     }
 
+    case 'UPDATE_ITEM_ALREADY_IN_CART_QUANTITY': {
+      const { productId, quantity } = action;
+      return {
+        ...state,
+        [productId]: {
+          ...state[productId],
+          quantity: quantity + 1,
+        },
+      };
+    }
+
     case 'REMOVE_PRODUCT': {
       const newCart = { ...state };
       delete newCart[action.productId];
@@ -40,4 +51,3 @@ export default function cartReducer(state = initialState, action) {
       return state;
   }
 }
-
