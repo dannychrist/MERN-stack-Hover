@@ -6,10 +6,13 @@ import { useParams, Link } from 'react-router-dom';
 
 import { addProduct, updateQuantityAlreadyInCart } from '../../actions';
 
+import FourOhFour from '../FourOhFour/FourOhFour'
+
 const ItemDetail = () => {
   // state
   const [product, setProduct] = React.useState(null);
   const [company, setCompany] = React.useState(null);
+  const [fourOhFour, setFourOhFour] = React.useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -27,8 +30,15 @@ const ItemDetail = () => {
   // setting the company state using the product's companyId. runs only when the product state updates.
   React.useEffect(() => {
     if (product !== null) {
-      let compObj = companyArray.find((obj) => obj.id === product.companyId);
-      setCompany(compObj);
+      const idChecker = productArray.map(obj => obj.id === parseInt(id))
+      console.log(idChecker)
+      if (idChecker.includes(true)) {
+        let compObj = companyArray.find((obj) => obj.id === product.companyId);
+        setCompany(compObj);
+      } else {
+        console.log('bacon')
+        setFourOhFour(true) 
+      }
     }
   }, [product, id]);
 
@@ -71,89 +81,98 @@ const ItemDetail = () => {
       );
     }
   }
-
-  return (
-    <>
-      {product !== null && company !== null && productStatus === 'idle' ? (
-        <>
-          <Wrapper>
-            <ItemWrapper>
-              <ItemName>
-                <ItemNameItem>{company.name}</ItemNameItem>
-                <ItemNameItem>{product.name}</ItemNameItem>
-                <ItemNameItem>{product.price}</ItemNameItem>
-              </ItemName>
-              <ImgWrapper>
-                <ItemImage src={product.imageSrc} alt={product.name} />
-              </ImgWrapper>
-            </ItemWrapper>
-            <DescriptionWrapper>
-              <Description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-                vel leo sodales, convallis nibh ac, tempus ipsum. Fusce posuere
-                cursus tempus. Vestibulum sit amet urna convallis, condimentum
-                massa ut, vestibulum dolor. Nullam ac enim sit amet leo
-                fermentum porta semper non ipsum. Nunc a neque magna. Praesent
-                vitae lacus id sapien mattis gravida. Fusce sit amet est
-                molestie, tincidunt eros sit amet, viverra leo.
-              </Description>
-              <Description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-                vel leo sodales, convallis nibh ac, tempus ipsum. Fusce posuere
-                cursus tempus. Vestibulum sit amet urna convallis, condimentum
-                massa ut, vestibulum dolor. Nullam ac enim sit amet leo
-                fermentum porta semper non ipsum. Nunc a neque magna. Praesent
-                vitae lacus id sapien mattis gravida. Fusce sit amet est
-                molestie, tincidunt eros sit amet, viverra leo.
-              </Description>
-              {product.numInStock > 0 ? (
-                <AddToCart
-                  onClick={() => {
-                    let findProduct = Object.values(cart).find(
-                      (item) => item.id === product.id
-                    );
-                    // If the product is already in the cart it will only increase the quantity of it else add to the cart
-                    if (findProduct !== undefined) {
-                      dispatch(
-                        updateQuantityAlreadyInCart(
-                          findProduct.id,
-                          findProduct.quantity
-                        )
+  if (fourOhFour === false){
+    return (
+      <>
+        {product !== null && company !== null && productStatus === 'idle' ? (
+          <>
+            <Wrapper>
+              <ItemWrapper>
+                <ItemName>
+                  <ItemNameItem>{company.name}</ItemNameItem>
+                  <ItemNameItem>{product.name}</ItemNameItem>
+                  <ItemNameItem>{product.price}</ItemNameItem>
+                </ItemName>
+                <ImgWrapper>
+                  <ItemImage src={product.imageSrc} alt={product.name} />
+                </ImgWrapper>
+              </ItemWrapper>
+              <DescriptionWrapper>
+                <DescriptionTitle>
+                  Lorem ipsum dolor sit amet
+                </DescriptionTitle>
+                <Description>
+                  Consectetur adipiscing elit. Mauris
+                  vel leo sodales, convallis nibh ac, tempus ipsum. Fusce posuere
+                  cursus tempus. Vestibulum sit amet urna convallis, condimentum
+                  massa ut, vestibulum dolor. Nullam ac enim sit amet leo
+                  fermentum porta semper non ipsum. Nunc a neque magna. Praesent
+                  vitae lacus id sapien mattis gravida. Fusce sit amet est
+                  molestie, tincidunt eros sit amet, viverra leo.
+                </Description>
+                <Description>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
+                  vel leo sodales, convallis nibh ac, tempus ipsum. Fusce posuere
+                  cursus tempus. Vestibulum sit amet urna convallis, condimentum
+                  massa ut, vestibulum dolor. Nullam ac enim sit amet leo
+                  fermentum porta semper non ipsum. Nunc a neque magna. Praesent
+                  vitae lacus id sapien mattis gravida. Fusce sit amet est
+                  molestie, tincidunt eros sit amet, viverra leo.
+                </Description>
+                {product.numInStock > 0 ? (
+                  <AddToCart
+                    onClick={() => {
+                      let findProduct = Object.values(cart).find(
+                        (item) => item.id === product.id
                       );
-                    } else dispatch(addProduct(product));
-                  }}
-                >
-                  ADD TO CART
-                </AddToCart>
-              ) : (
-                <SoldOut>OUT OF STOCK</SoldOut>
-              )}
-            </DescriptionWrapper>
-            <RelatedItemWrapper>
-              <BlackBox>RELATED ITEMS</BlackBox>
-              {relatedArray.length > 0 ? (
-                relatedArray.map((p) => {
-                  return (
-                    <RelatedItem key={p.id} to={`/product/${p.id}`}>
-                      <img src={p.imageSrc} />
-                    </RelatedItem>
-                  );
-                })
-              ) : (
-                <NoItemsContainer>
-                  <h1 style={{ textAlign: 'center' }}>
-                    There's no related items for this product
-                  </h1>
-                </NoItemsContainer>
-              )}
-            </RelatedItemWrapper>
-          </Wrapper>
-        </>
-      ) : (
-        <h1>Loading...</h1>
-      )}
-    </>
-  );
+                      // If the product is already in the cart it will only increase the quantity of it else add to the cart
+                      if (findProduct !== undefined) {
+                        dispatch(
+                          updateQuantityAlreadyInCart(
+                            findProduct.id,
+                            findProduct.quantity
+                          )
+                        );
+                      } else dispatch(addProduct(product));
+                    }}
+                  >
+                    ADD TO CART
+                  </AddToCart>
+                ) : (
+                  <SoldOut>OUT OF STOCK</SoldOut>
+                )}
+              </DescriptionWrapper>
+              <RelatedItemWrapper>
+                <BlackBox>RELATED ITEMS</BlackBox>
+                {relatedArray.length > 0 ? (
+                  relatedArray.map((p) => {
+                    return (
+                      <RelatedItem key={p.id} to={`/product/${p.id}`}>
+                        <img src={p.imageSrc} />
+                      </RelatedItem>
+                    );
+                  })
+                ) : (
+                  <NoItemsContainer>
+                    <h1 style={{ textAlign: 'center' }}>
+                      There's no related items for this product
+                    </h1>
+                  </NoItemsContainer>
+                )}
+              </RelatedItemWrapper>
+            </Wrapper>
+          </>
+        ) : (
+          <h1>Loading...</h1>
+        )}
+      </>
+    );
+    
+  } else {
+    return (
+      <FourOhFour/>
+    )
+  }
 };
 
 const RelatedItem = styled(Link)`
@@ -189,7 +208,7 @@ const AddToCart = styled.button`
   background-color: black;
   color: white;
   font-family: 'Open Sans', sans-serif;
-  border: 1px solid black;
+  border: none;
   outline: none;
   height: 100px;
   bottom: 0;
@@ -223,6 +242,13 @@ const Description = styled.div`
   font-family: 'Open Sans', sans-serif;
   padding: 15px;
   font-size: 15px;
+`;
+
+const DescriptionTitle = styled.div`
+  font-family: 'Open Sans', sans-serif;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 600;
 `;
 
 const DescriptionWrapper = styled.div`

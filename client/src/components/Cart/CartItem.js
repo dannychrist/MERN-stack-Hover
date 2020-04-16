@@ -115,6 +115,8 @@ const QuantityInput = styled.input`
   height: 25px;
   margin: auto;
   font-size: 15px;
+  margin-top: 55px;
+  text-align: center;
 `;
 
 const TotalWrapper = styled.div`

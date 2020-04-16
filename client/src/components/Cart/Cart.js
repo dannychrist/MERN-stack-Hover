@@ -59,7 +59,7 @@ const Cart = () => {
       <Bottom>
         <Total>Total: ${grandTotal().toFixed(2)}</Total>
         <ButtonWrapper>
-          <Button to='/shop'>Continue Shopping</Button>
+          <Button to='/shop'>CONTINUE SHOPPING</Button>
           <PurchaseButton
             onClick={handleSubmit}
             disabled={Object.values(products).length > 0 ? false : true}
@@ -68,7 +68,7 @@ const Cart = () => {
               width: 90,
             }}
           >
-            Purchase
+            PURCHASE
           </PurchaseButton>
         </ButtonWrapper>
       </Bottom>
@@ -163,7 +163,7 @@ const Button = styled(Link)`
   padding: 5px;
   text-align: center;
   font-size: 16px;
-  font-weight: 600;
+  /* font-weight: 600; */
   cursor: pointer;
   border: 1px solid black;
   text-decoration: none;
@@ -185,7 +185,7 @@ const PurchaseButton = styled.button`
   padding: 5px;
   text-align: center;
   font-size: 16px;
-  font-weight: 600;
+  /* font-weight: 600; */
   border: 1px solid #000;
   text-decoration: none;
   transition: 500ms;

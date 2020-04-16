@@ -10,6 +10,7 @@ import Shop from '../components/Shop/Shop';
 import ItemDetails from '../components/ItemDetail/ItemDetail';
 import Cart from '../components/Cart';
 import Purchased from '../components/Purchased';
+import FourOhFour from '../components/FourOhFour/FourOhFour';
 
 // Import actions
 import {
@@ -62,6 +63,9 @@ function App() {
           </Route>
           <Route exact path='/purchased'>
             <Purchased />
+          </Route>
+          <Route exact path='*'>
+            <FourOhFour />
           </Route>
         </Switch>
       </div>
