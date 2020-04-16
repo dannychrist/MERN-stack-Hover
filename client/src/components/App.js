@@ -11,6 +11,7 @@ import ItemDetails from '../components/ItemDetail/ItemDetail';
 import Cart from '../components/Cart';
 import Purchased from '../components/Purchased';
 import FourOhFour from '../components/FourOhFour/FourOhFour';
+import Footer from '../components/Footer/Footer'
 
 // Import actions
 import {
@@ -43,7 +44,7 @@ function App() {
 
   return (
     <Router>
-      <div style={{ padding: '0 2.5% 0 2.5%' }}>
+      <div style={{ padding: '0 2.5% 0 2.5%', position:'relative'}}>
         <Header />
         <Switch>
           <Route exact path='/'>
@@ -68,6 +69,7 @@ function App() {
             <FourOhFour />
           </Route>
         </Switch>
+      <Footer />
       </div>
       <GlobalStyles />
     </Router>

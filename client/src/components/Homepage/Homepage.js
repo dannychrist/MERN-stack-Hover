@@ -3,59 +3,83 @@ import styled from 'styled-components'
 
 const Homepage = () => {
     return (
-        <HomepageGrid>
-            <FloatingDiv>
-                <GShockImage src='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/screen-shot-2018-09-12-at-3-49-51-pm-1536781919.png' alt='G-Shock Advert'/>
-                <DivFooter>EXPLORE G-SHOCK</DivFooter>
-            </FloatingDiv>
-            <div>
-                <img style={{width:'232px', border: '1px solid black'}} src='https://aaayejaaaye.com/pictures/ChrisInterview/chrishand.jpg' alt='NASA Hand'/>
-                <DivFooter>Transhumanism</DivFooter>
-            </div>
-        </HomepageGrid>
+        <HomepageDiv>
+            {/* <FloatingDiv> */}
+                <NasaHandImage src='https://aaayejaaaye.com/pictures/ChrisInterview/chrishand.jpg' alt='NASA Hand'/>
+                <ImgFooter>GET CONNECTED</ImgFooter>
+            {/* </FloatingDiv> */}
+                <GShockImage src='https://cdn.gearpatrol.com/wp-content/uploads/2019/06/Casio-G-Shock-GMW-b5000-gear-patrol-full-03.jpg' alt='G-Shock Advert'/>
+                <ImgFooter2>EXPLORE G-SHOCK</ImgFooter2>
+        </HomepageDiv>
     )
 }
 
-const HomepageGrid = styled.div`
+// style={{width:'232px', border: '1px solid black'}}
+const HomepageDiv = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: 60% 40%;
-    grid-template-areas: 'left .';
-    margin-top: 50px;
+    border: 1px solid black;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 'left right';
+    margin-top: 40px;
 `
 
-const GShockImage = styled.img`
-    grid-area: media;
-    width: 100%;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    border-top: 1px solid black;
+const NasaHandImage = styled.img`
+    width: 90%;
+    padding: 5% 5% 5% 5%;
+    grid-area: left;
+    /* border: 1px solid black; */
+    margin-top: 40px; 
+    margin-bottom: 40px;
 `
+const GShockImage = styled.img`
+    width: 90%;
+    padding: 5% 5% 5% 5%;
+    grid-area: right;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    /* border: 1px solid black; */
+`
+
+
 
 const FloatingDiv = styled.div`
-    /* border: 1px solid black; */
-    width: auto;
-    height: auto;
-    background-color: white;
-    grid-area: left;
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-areas: 'media'
-    'footer';
-    object-fit:contain;
+width: 100%;
+/* border: 2px solid #000; */
+/* display: grid;
+grid-template-columns: 50% 50%;
+grid-template-areas: 'left right';
+font-family: 'Open Sans', sans-serif; */
 `
 
-const DivFooter = styled.div`
-    position: relative;
+const ImgFooter = styled.div`
+    margin-top: 550px;
+    color: white;
+    font-size: 36px;
+    font-weight: 900;
+    width: 100%;
+    height: 400px;
+    padding: 22px 0 0 0;
+    /* border: 1px solid black; */
+    text-align: center;
+    grid-area: left;
+    font-family: 'Open Sans', sans-serif;
+`
+const ImgFooter2 = styled.div`
+    margin-top: 550px;
+    color: white;
+    font-size: 36px;
+    font-weight: 900;
     width: 100%;
     padding: 22px 0 22px 0;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     text-align: center;
-    grid-area: footer;
+    height: 50%;
+    grid-area: right;
     font-family: 'Open Sans', sans-serif;
-    background-color: white;
-    height: auto;
-    margin-top: -2px;
 `
+    /* height: auto; */
+    /* margin-top: -2px; */
+
 
 export default Homepage

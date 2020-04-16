@@ -38,6 +38,11 @@ const Header = () => {
             ) : null}
           </NavLink>
         </li>
+        <li>
+          <NavLink exact to='/about' activeStyle={{ textDecoration: 'underline' }}>
+        ABOUT
+          </NavLink>
+        </li>
       </LinkDiv>
     </HeaderDiv>
   );
