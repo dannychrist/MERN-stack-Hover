@@ -29,8 +29,7 @@ const Shop = () => {
       .then((data) => {
         if (data.length > 0) dispatch(receiveAllProducts(data));
         else dispatch(receiveProductsError(data));
-      })
-      .catch((err) => console.log(err));
+      });
   };
 
   return (
@@ -85,7 +84,7 @@ const WrapperDiv = styled.div`
   margin-top: 50px;
   display: grid;
   grid-template-columns: 20% auto 20%;
-  height: 500px;
+  height: auto;
   font-family: 'Open Sans', sans-serif;
 `;
 
