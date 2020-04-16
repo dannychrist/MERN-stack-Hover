@@ -32,9 +32,9 @@ const Header = () => {
             style={{ display: 'flex' }}
             activeStyle={{ textDecoration: 'underline' }}
           >
-            CART &thinsp;{' '}
+            CART {' '}
             {Object.values(cartNumber).length > 0 ? (
-              <div>&#40;{Object.values(cartNumber).length}&#41;</div>
+              <div>&thinsp;&#40;{Object.values(cartNumber).length}&#41;</div>
             ) : null}
           </NavLink>
         </li>

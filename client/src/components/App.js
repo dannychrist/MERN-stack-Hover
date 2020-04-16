@@ -10,8 +10,8 @@ import Shop from '../components/Shop/Shop';
 import ItemDetails from '../components/ItemDetail/ItemDetail';
 import Cart from '../components/Cart';
 import Purchased from '../components/Purchased';
-import About from '../components/About/About';
-import Footer from '../components/Footer/Footer';
+import FourOhFour from '../components/FourOhFour/FourOhFour';
+import Footer from '../components/Footer/Footer'
 
 // Import actions
 import {
@@ -65,8 +65,8 @@ function App() {
           <Route exact path='/purchased'>
             <Purchased />
           </Route>
-          <Route exact path='/about'>
-          <About />
+          <Route exact path='*'>
+            <FourOhFour />
           </Route>
         </Switch>
       <Footer />
