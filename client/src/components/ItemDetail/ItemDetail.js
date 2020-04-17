@@ -152,7 +152,7 @@ const ItemDetail = () => {
                   })
                 ) : (
                   <NoItemsContainer>
-                    <h1 style={{ textAlign: 'center' }}>
+                    <h1 style={{ textAlign: 'center', fontFamily: 'Open Sans' }}>
                       There's no related items for this product
                     </h1>
                   </NoItemsContainer>
