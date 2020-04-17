@@ -6,7 +6,7 @@ import { useParams, Link } from 'react-router-dom';
 
 import { addProduct, updateQuantityAlreadyInCart } from '../../actions';
 
-import FourOhFour from '../FourOhFour/FourOhFour'
+import FourOhFour from '../FourOhFour/FourOhFour';
 
 const ItemDetail = () => {
   // state
@@ -30,14 +30,14 @@ const ItemDetail = () => {
   // setting the company state using the product's companyId. runs only when the product state updates.
   React.useEffect(() => {
     if (product !== null) {
-      const idChecker = productArray.map(obj => obj.id === parseInt(id))
-      console.log(idChecker)
+      const idChecker = productArray.map((obj) => obj.id === parseInt(id));
+      console.log(idChecker);
       if (idChecker.includes(true)) {
         let compObj = companyArray.find((obj) => obj.id === product.companyId);
         setCompany(compObj);
       } else {
-        console.log('bacon')
-        setFourOhFour(true) 
+        console.log('bacon');
+        setFourOhFour(true);
       }
     }
   }, [product, id]);
@@ -81,7 +81,7 @@ const ItemDetail = () => {
       );
     }
   }
-  if (fourOhFour === false){
+  if (fourOhFour === false) {
     return (
       <>
         {product !== null && company !== null && productStatus === 'idle' ? (
@@ -98,26 +98,24 @@ const ItemDetail = () => {
                 </ImgWrapper>
               </ItemWrapper>
               <DescriptionWrapper>
-                <DescriptionTitle>
-                  Lorem ipsum dolor sit amet
-                </DescriptionTitle>
+                <DescriptionTitle>Lorem ipsum dolor sit amet</DescriptionTitle>
                 <Description>
-                  Consectetur adipiscing elit. Mauris
-                  vel leo sodales, convallis nibh ac, tempus ipsum. Fusce posuere
-                  cursus tempus. Vestibulum sit amet urna convallis, condimentum
-                  massa ut, vestibulum dolor. Nullam ac enim sit amet leo
-                  fermentum porta semper non ipsum. Nunc a neque magna. Praesent
-                  vitae lacus id sapien mattis gravida. Fusce sit amet est
-                  molestie, tincidunt eros sit amet, viverra leo.
+                  Consectetur adipiscing elit. Mauris vel leo sodales, convallis
+                  nibh ac, tempus ipsum. Fusce posuere cursus tempus. Vestibulum
+                  sit amet urna convallis, condimentum massa ut, vestibulum
+                  dolor. Nullam ac enim sit amet leo fermentum porta semper non
+                  ipsum. Nunc a neque magna. Praesent vitae lacus id sapien
+                  mattis gravida. Fusce sit amet est molestie, tincidunt eros
+                  sit amet, viverra leo.
                 </Description>
                 <Description>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-                  vel leo sodales, convallis nibh ac, tempus ipsum. Fusce posuere
-                  cursus tempus. Vestibulum sit amet urna convallis, condimentum
-                  massa ut, vestibulum dolor. Nullam ac enim sit amet leo
-                  fermentum porta semper non ipsum. Nunc a neque magna. Praesent
-                  vitae lacus id sapien mattis gravida. Fusce sit amet est
-                  molestie, tincidunt eros sit amet, viverra leo.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Mauris vel leo sodales, convallis nibh ac, tempus ipsum. Fusce
+                  posuere cursus tempus. Vestibulum sit amet urna convallis,
+                  condimentum massa ut, vestibulum dolor. Nullam ac enim sit
+                  amet leo fermentum porta semper non ipsum. Nunc a neque magna.
+                  Praesent vitae lacus id sapien mattis gravida. Fusce sit amet
+                  est molestie, tincidunt eros sit amet, viverra leo.
                 </Description>
                 {product.numInStock > 0 ? (
                   <AddToCart
@@ -167,11 +165,8 @@ const ItemDetail = () => {
         )}
       </>
     );
-    
   } else {
-    return (
-      <FourOhFour/>
-    )
+    return <FourOhFour />;
   }
 };
 
@@ -280,6 +275,7 @@ const Wrapper = styled.div`
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 500px 200px;
   margin-top: 50px;
+  margin-bottom: 100px;
   grid-template-areas:
     '. .'
     'related related';

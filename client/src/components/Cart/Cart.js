@@ -77,12 +77,10 @@ const Cart = () => {
 };
 
 const Wrapper = styled.section`
-  position: sticky;
-  top: 0;
   width: 100%;
   color: white;
   border: 1px solid black;
-  padding: 25px 0 25px 0;
+  padding: 25px 0px;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
@@ -163,7 +161,6 @@ const Button = styled(Link)`
   padding: 5px;
   text-align: center;
   font-size: 16px;
-  /* font-weight: 600; */
   cursor: pointer;
   border: 1px solid black;
   text-decoration: none;
@@ -185,7 +182,6 @@ const PurchaseButton = styled.button`
   padding: 5px;
   text-align: center;
   font-size: 16px;
-  /* font-weight: 600; */
   border: 1px solid #000;
   text-decoration: none;
   transition: 500ms;
